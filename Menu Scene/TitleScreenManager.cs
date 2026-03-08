@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System;
 
 namespace DM
 {
@@ -9,7 +10,16 @@ namespace DM
     {
         public void StartNetworkAsHost()
         {
-            NetworkManager.Singleton.StartHost();
+            try
+            {
+                NetworkManager.Singleton.StartHost();
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+                NetworkManager.Singleton.StartClient();
+            }
+
         }
 
         public void StartNewGame()
