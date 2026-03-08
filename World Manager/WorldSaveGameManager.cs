@@ -30,5 +30,10 @@ namespace DM
 
             yield return null;
         }
+
+        public int GetWorldSceneIndex()
+        {
+            return world_scene_index;
+        }
     }
 }
