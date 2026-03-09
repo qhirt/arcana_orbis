@@ -16,6 +16,10 @@ namespace DM
         [SerializeField] public float horizontal_input;
         [SerializeField] public float move_amount;
 
+        [SerializeField] Vector2 camera_input;
+        [SerializeField] public float camera_vertical_input;
+        [SerializeField] public float camera_horizontal_input;
+
 
         private void Awake()
         {
@@ -43,6 +47,7 @@ namespace DM
                 player_controls = new PlayerControls();
 
                 player_controls.PlayerMovement.Movement.performed += i => movement_input = i.ReadValue<Vector2>();
+                player_controls.PlayerCamera.Movement.performed += i => camera_input = i.ReadValue<Vector2>();
             }
 
             player_controls.Enable();
@@ -83,6 +88,7 @@ namespace DM
         private void Update()
         {
             HandleMovementInput();
+            HandleCameraInput();
         }
 
         private void HandleMovementInput()
@@ -105,6 +111,12 @@ namespace DM
             {
                 move_amount = 0.0f;
             }
+        }
+
+        private void HandleCameraInput()
+        {
+            camera_vertical_input = camera_input.y;
+            camera_horizontal_input = camera_input.x;
         }
     }
 }

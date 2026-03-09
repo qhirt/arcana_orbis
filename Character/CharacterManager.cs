@@ -40,5 +40,10 @@ namespace DM
                     character_network_manager.network_rotation_smooth_time);
             }
         }
+
+        protected virtual void LateUpdate()
+        {
+
+        }
     }
 }

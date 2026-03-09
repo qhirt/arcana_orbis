@@ -42,6 +42,9 @@ namespace DM
         {
             target_rotation_direction = PlayerCamera.instance.camera_object.transform.forward * vertical_movement;
             target_rotation_direction += PlayerCamera.instance.camera_object.transform.right * horizontal_movement;
+            target_rotation_direction.Normalize();
+            target_rotation_direction.y = 0.0f;
+
 
             if (target_rotation_direction == Vector3.zero)
             {
@@ -51,8 +54,6 @@ namespace DM
             Quaternion new_rotation = Quaternion.LookRotation(target_rotation_direction);
             Quaternion target_rotation = Quaternion.Slerp(transform.rotation, new_rotation, rotation_speed * Time.deltaTime);
             transform.rotation = target_rotation;
-            target_rotation.Normalize();
-            target_rotation.y = 0.0f;
         }
 
         private void HandleGroundedMovement()
