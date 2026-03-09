@@ -14,12 +14,11 @@ namespace DM
             {
                 NetworkManager.Singleton.StartHost();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Debug.Log(e);
                 NetworkManager.Singleton.StartClient();
             }
-
         }
 
         public void StartNewGame()
