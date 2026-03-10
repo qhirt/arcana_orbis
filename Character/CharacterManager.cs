@@ -8,8 +8,9 @@ namespace DM
     public class CharacterManager : NetworkBehaviour
     {
         public CharacterController character_controller;
+        public Animator animator;
 
-        CharacterNetworkManager character_network_manager;
+        public CharacterNetworkManager character_network_manager;
 
         protected virtual void Awake()
         {
@@ -17,6 +18,7 @@ namespace DM
 
             character_controller = GetComponent<CharacterController>();
             character_network_manager = GetComponent<CharacterNetworkManager>();
+            animator = GetComponent<Animator>();
         }
 
         protected virtual void Update()

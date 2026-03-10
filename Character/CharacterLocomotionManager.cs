@@ -10,5 +10,10 @@ namespace DM
         {
 
         }
+
+        protected virtual void Update()
+        {
+
+        }
     }
 }

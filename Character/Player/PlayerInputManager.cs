@@ -9,6 +9,8 @@ namespace DM
     {
         public static PlayerInputManager instance;
 
+        public PlayerManager player;
+
         PlayerControls player_controls;
 
         [SerializeField] Vector2 movement_input;
@@ -93,23 +95,29 @@ namespace DM
 
         private void HandleMovementInput()
         {
-            vertical_input = movement_input.y;
-            horizontal_input = movement_input.x;
+            if (player != null)
+            {
+                vertical_input = movement_input.y;
+                horizontal_input = movement_input.x;
 
-            move_amount = Mathf.Clamp01(Mathf.Abs(vertical_input) + Mathf.Abs(horizontal_input));
+                move_amount = Mathf.Clamp01(Mathf.Abs(vertical_input) + Mathf.Abs(horizontal_input));
 
-            //  SNAP THE MOVE AMOUNT TO 0.0f, 0.5f, OR 1.0f
-            if (move_amount <= 0.5f && move_amount > 0.0f)
-            {
-                move_amount = 0.5f;
-            }
-            else if (move_amount > 0.5f && move_amount <= 1.0f)
-            {
-                move_amount = 1.0f;
-            }
-            else
-            {
-                move_amount = 0.0f;
+                //  SNAP THE MOVE AMOUNT TO 0.0f, 0.5f, OR 1.0f
+                if (move_amount <= 0.5f && move_amount > 0.0f)
+                {
+                    move_amount = 0.5f;
+                }
+                else if (move_amount > 0.5f && move_amount <= 1.0f)
+                {
+                    move_amount = 1.0f;
+                }
+                else
+                {
+                    move_amount = 0.0f;
+                }
+
+                //  IF NOT LOCKED ON, THE PLAYER WILL RUN "FORWARD" NO MATTER WHAT DIRECTION OF INPUT
+                player.player_animator_manager.UpdateAnimatorMovementParameters(0.0f, move_amount);
             }
         }
 

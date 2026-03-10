@@ -22,7 +22,29 @@ namespace DM
         protected override void Awake()
         {
             base.Awake();
+
             player = GetComponent<PlayerManager>();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (player.IsOwner)
+            {
+                player.character_network_manager.network_vertical_animator_value.Value = vertical_movement;
+                player.character_network_manager.network_horizontal_animator_value.Value = horizontal_movement;
+                player.character_network_manager.network_move_amount_animator_value.Value = move_amount;
+            }
+            else
+            {
+                vertical_movement = player.character_network_manager.network_vertical_animator_value.Value;
+                horizontal_movement = player.character_network_manager.network_horizontal_animator_value.Value;
+                move_amount = player.character_network_manager.network_move_amount_animator_value.Value;
+
+                //  IF NOT LOCKED ON
+                player.player_animator_manager.UpdateAnimatorMovementParameters(0, move_amount);
+            }
         }
 
         public void HandleAllMovement()
@@ -36,6 +58,7 @@ namespace DM
         {
             vertical_movement = PlayerInputManager.instance.vertical_input;
             horizontal_movement = PlayerInputManager.instance.horizontal_input;
+            move_amount = PlayerInputManager.instance.move_amount;
         }
 
         private void HandleRotation()

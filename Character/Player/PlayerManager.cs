@@ -6,13 +6,15 @@ namespace DM
 {
     public class PlayerManager : CharacterManager
     {
-        PlayerLocomotionManager player_locomotion_manager;
+        public PlayerLocomotionManager player_locomotion_manager;
+        public PlayerAnimatorManager player_animator_manager;
 
         protected override void Awake()
         {
             base.Awake();
 
             player_locomotion_manager = GetComponent<PlayerLocomotionManager>();
+            player_animator_manager = GetComponent<PlayerAnimatorManager>();
         }
 
         protected override void Update()
@@ -40,6 +42,7 @@ namespace DM
             if (IsOwner)
             {
                 PlayerCamera.instance.player = this;
+                PlayerInputManager.instance.player = this;
             }
         }
     }

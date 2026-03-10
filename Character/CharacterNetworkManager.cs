@@ -14,5 +14,10 @@ namespace DM
         public Vector3 network_position_velocity;
         public float network_position_smooth_time = 0.1f;
         public float network_rotation_smooth_time = 0.1f;
+
+        [Header("ANIMATOR")]
+        public NetworkVariable<float> network_horizontal_animator_value = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> network_vertical_animator_value = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> network_move_amount_animator_value = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
 }
